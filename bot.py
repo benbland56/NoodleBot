@@ -61,6 +61,20 @@ async def create_channel(ctx, channel_name):
         await guild.create_text_channel(channel_name)   
         response = "Channel made"
         await ctx.send(response)
+@bot.command(name = "guess-the-number")
+async def guess (ctx, number_guess: int):
+    number = random.randint(0, 5)
+    print (number)
+    print (number_guess)
+
+    if number_guess == number:
+        response = "Congrats you guessed it! Don't get anything though"
+        await ctx.send(response)
+    elif number_guess != number:
+        response = "Better luck next time buddy, the number was "
+        answer = number
+        await ctx.send(response)
+        await ctx.send(answer)
 
 
 @bot.event
