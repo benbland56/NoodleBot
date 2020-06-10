@@ -2,9 +2,11 @@
 A Discord bot with some extra noodle
 
 This bot uses python3
+
 To use this bot you need the following packages
 
 discord.py
+
 dotenv.py
 
 Both can be installed with pip3 install *package*
