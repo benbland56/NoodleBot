@@ -67,10 +67,7 @@ async def create_channel(ctx, channel_name):
 ##Small game for guessing numbers, will give level rewards for winning
 @bot.command(name = "guess-the-number")
 async def guess (ctx, number_guess: int):
-    number = random.randint(0, 5)
-    print (number)
-    print (number_guess)
-
+    number = random.randint(1, 5)
     if number_guess == number:
         response = "Congrats you guessed it! Don't get anything though"
         await ctx.send(response)
@@ -79,8 +76,10 @@ async def guess (ctx, number_guess: int):
         answer = number
         await ctx.send(response)
         await ctx.send(answer)
+
 ##Allows NoodleBot to join a voice channel when a given message is sent
 @bot.command(name = "Join")
+@commands.has_role('Bot tester')
 async def on_message(message):
         author = message.author
         voice = author.voice.channel
@@ -97,9 +96,11 @@ async def on_message(message):
             channel = message.channel
             await channel.send(response)
     await bot.process_commands(message)
+
 ##Returns an error if a user doesn't have correct permissions to use the bot
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.errors.CheckFailure):
-        await ctx.send('You do not have the correct role for this command') 
+        await ctx.send('You do not have the correct role for this command')
+         
 bot.run(TOKEN)
