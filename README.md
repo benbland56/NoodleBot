@@ -5,11 +5,11 @@ This bot uses python3
 
 To use this bot you need the following packages
 
-discord.py
+* discord.py
 
-dotenv.py
+* dotenv.py
 
-asyncio.py
+* asyncio.py
 
 All can be installed with pip3 install "package" without quotations
 
