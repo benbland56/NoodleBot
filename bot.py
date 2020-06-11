@@ -2,9 +2,12 @@
 import os
 import random
 from discord import VoiceChannel
+from discord import Spotify
+import discord 
 from discord.ext import commands
 from discord.ext.commands import Bot
 from dotenv import load_dotenv
+
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -85,6 +88,18 @@ async def on_message(message):
         voice = author.voice.channel
         await VoiceChannel.connect(voice)
 
+##Test Spotify intergration
+@bot.command(name = "TrackName")
+async def spotify (ctx, user: discord.Member=None):
+    user = user or ctx.author
+    print (user)
+    for activity in user.activities:
+        if isinstance(activity, Spotify):
+                await ctx.send(f"{user} is listening to {activity.title} by {activity.artist}")
+        else:
+            print("oops")
+            return
+
 ##Removes any messages contained in the bad_words.txt file
 @bot.event
 async def on_message(message):
@@ -102,5 +117,5 @@ async def on_message(message):
 async def on_command_error(ctx, error):
     if isinstance(error, commands.errors.CheckFailure):
         await ctx.send('You do not have the correct role for this command')
-         
+
 bot.run(TOKEN)
