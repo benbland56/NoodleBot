@@ -4,6 +4,7 @@ import random
 from discord import VoiceChannel
 from discord import Spotify
 import discord 
+import asyncio
 from discord.ext import commands
 from discord.ext.commands import Bot
 from dotenv import load_dotenv
@@ -87,6 +88,26 @@ async def on_message(message):
         author = message.author
         voice = author.voice.channel
         await VoiceChannel.connect(voice)
+
+@bot.command(name = "Ear_rape")
+@commands.has_role('Bot tester')
+async def playTrack(ctx):
+    author = ctx.author
+    voice = author.voice.channel
+    channel = None
+    if voice != None:
+        channel = voice.name
+        print (channel)
+        vc = await VoiceChannel.connect(voice)
+        vc.play(discord.FFmpegPCMAudio('Ali-a.mp3'), after=lambda e: print('done', e))
+        while vc.is_playing():
+            print("Playing")
+            await asyncio.sleep(1)
+        vc.stop()
+        await vc.disconnect()
+    else: 
+        await ctx.send(f"User is not in channel")
+
 
 ##Test Spotify intergration
 @bot.command(name = "TrackName")
