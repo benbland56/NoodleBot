@@ -3,13 +3,17 @@ import os
 import random
 
 from discord.ext import commands
+from discord.ext.commands import Bot
 from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 
-bot = commands.Bot(command_prefix ='!')
+bot = Bot(command_prefix ='!')
+
+with open("bad_words.txt") as file:
+    bad_words = [bad_word.strip().lower() for bad_word in file.readlines()]
 
 # Event for NoodleBot connecting to server
 @bot.event
@@ -61,6 +65,8 @@ async def create_channel(ctx, channel_name):
         await guild.create_text_channel(channel_name)   
         response = "Channel made"
         await ctx.send(response)
+    else:
+        return
 @bot.command(name = "guess-the-number")
 async def guess (ctx, number_guess: int):
     number = random.randint(0, 5)
@@ -76,6 +82,19 @@ async def guess (ctx, number_guess: int):
         await ctx.send(response)
         await ctx.send(answer)
 
+
+@bot.event
+async def on_message(message):
+    message_content = message.content.strip().lower()
+    for bad_word in bad_words:
+        if bad_word in message_content:
+            await message.delete()
+            response = "Naughty Naughty"
+            channel = message.channel
+            await channel.send(response)
+        elif message.content != "Test":
+            print("Allowed")
+            return
 
 @bot.event
 async def on_command_error(ctx, error):
