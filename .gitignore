@@ -1,5 +1,3 @@
 *.env
 *.txt
 *.log
-*.mp3
-ffmpeg-20200610-9dfb19b-win64-static
