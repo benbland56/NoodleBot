@@ -89,7 +89,8 @@ async def on_message(message):
         voice = author.voice.channel
         await VoiceChannel.connect(voice)
 
-@bot.command(name = "Ear_rape")
+##Plays a song of questionable taste
+@bot.command(name = "Ear_pain")
 @commands.has_role('Bot tester')
 async def playTrack(ctx):
     author = ctx.author
@@ -108,6 +109,21 @@ async def playTrack(ctx):
     else: 
         await ctx.send(f"User is not in channel")
 
+##Puts your friends in their place
+@bot.command(name = "Yo_but_when")
+@commands.has_role('Bot tester')
+async def playTTS(ctx):
+    voice = ctx.author.voice.channel
+    if voice != None:
+        vc = await VoiceChannel.connect(voice)
+        vc.play(discord.FFmpegPCMAudio('when.mp3'), after = lambda e:print('done', e))
+        while vc.is_playing():
+            print("Playing")
+            await asyncio.sleep(1)
+        vc.stop()
+        await vc.disconnect()
+    else:
+        await ctx.send(f"User is not in channel")
 
 ##Test Spotify intergration
 @bot.command(name = "TrackName")
