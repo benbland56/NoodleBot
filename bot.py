@@ -34,7 +34,7 @@ async def test(ctx):
 
 @bot.command(name = "roast_me")
 async def roast(ctx):
-    response = "I'd offer you some gun but your smile has plenty"
+    response = "I'd offer you some gum but your smile has plenty"
     await ctx.send(response)
 
 @bot.command(name = "Hey_noodle")
