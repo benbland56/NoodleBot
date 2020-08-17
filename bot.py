@@ -27,10 +27,6 @@ async def on_ready():
 
 
 ##Commands
-@bot.command(name = "test", help = "Test message because i'm bad at python so who knows when this bot is gonna work")
-async def test(ctx):
-    response = "Yup i do be kinda working tho"
-    await ctx.send(response)
 
 @bot.command(name = "roast_me")
 async def roast(ctx):
@@ -42,11 +38,6 @@ async def cutey(ctx):
     response = "Sup kid"
     await ctx.send(response)
 
-
-@bot.command(name ="oweh")
-async def cheek(ctx):
-    response = "I ain't working bruv"
-    await ctx.send(response)
 
 @bot.command(name = "roll_dice", help = "Send the command, followed by 2 numbers. The first being the number of dice, the second being the number of sides each dice has")
 async def roll(ctx, number_of_dice: int, number_of_sides: int):
